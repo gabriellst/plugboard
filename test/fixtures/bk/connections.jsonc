@@ -1,0 +1,19 @@
+{
+  "plugboard": 1,
+  "name": "bk-company",
+  "extends": null,
+  "secrets": {
+    "files": [".secrets/.env"],
+    "vars": {
+      "GH_TOKEN": { "service": "GitHub", "source": "keychain", "owner": "gabriel", "rotate": "auto" }
+    }
+  },
+  "cli": {
+    "gh": { "install": { "brew": "gh" }, "check": "gh auth status", "auth": "external" }
+  },
+  "mcp": {
+    // herdado por todos os filhos; bk-reviews remove
+    "gdrive": { "type": "http", "url": "https://mcp.google.com/drive" }
+  },
+  "permissions": { "allow": ["Bash(gh:*)"], "deny": ["Bash(rm -rf:*)"] }
+}

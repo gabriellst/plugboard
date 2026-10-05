@@ -1,0 +1,27 @@
+{
+  "plugboard": 1,
+  "name": "bk-reviews",
+  "extends": "..",
+  "emit": ["claude-code"],
+  "secrets": {
+    "files": [".secrets/.env"],
+    "vars": {
+      "BUNNY_API_KEY":     { "service": "BunnyCDN", "owner": "gabriel", "rotate": "90d", "lastRotated": "2026-05-19" },
+      "REVIEWS_DB_RO_URL": { "service": "Postgres", "owner": "gabriel", "access": "read-only" }
+    }
+  },
+  "cli": {
+    "bunny": { "install": { "bunx": "@bunny.net/cli" }, "check": "bunny --version", "auth": { "env": ["BUNNY_API_KEY"] } }
+  },
+  "mcp": {
+    "gdrive": null,                                  // remove o herdado da org
+    "postgres-ro": {
+      "command": "bunx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${REVIEWS_DB_RO_URL}"],
+      "needs": ["REVIEWS_DB_RO_URL"],
+      "why": "consulta ad-hoc; read-only de propósito"
+    }
+  },
+  "permissions": { "allow": ["Bash(bun:*)"] },
+  "targets": ["software/bk-reviews"]
+}

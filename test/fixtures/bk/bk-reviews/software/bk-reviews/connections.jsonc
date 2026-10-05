@@ -1,0 +1,10 @@
+{
+  "plugboard": 1,
+  "name": "bk-reviews-monorepo",
+  "extends": "../..",
+  "cli": {
+    // sobrescreve o `check` herdado: aqui a gente quer o whoami completo
+    "bunny": { "install": { "bunx": "@bunny.net/cli" }, "check": "bunny account info", "auth": { "env": ["BUNNY_API_KEY"] } }
+  },
+  "permissions": { "allow": ["Bash(bunx biome:*)"] }
+}

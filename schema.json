@@ -1,0 +1,389 @@
+{
+  "title": "plugboard connections manifest",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "plugboard": {
+      "type": "number",
+      "const": 1,
+      "description": "Versão do formato"
+    },
+    "name": {
+      "type": "string"
+    },
+    "extends": {
+      "description": "Caminho do manifesto pai, \"auto\" pra subir a árvore, ou null pra raiz",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "const": "auto"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "emit": {
+      "description": "Emitters. Default: [\"claude-code\"]",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "profile": {
+      "type": "string"
+    },
+    "skill": {
+      "type": "boolean"
+    },
+    "targets": {
+      "default": [],
+      "description": "Onde materializar. Não herda.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "secrets": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "files": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vars": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "service": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "default": "env",
+                    "type": "string",
+                    "enum": [
+                      "env",
+                      "keychain",
+                      "file",
+                      "external"
+                    ]
+                  },
+                  "owner": {
+                    "type": "string"
+                  },
+                  "rotate": {
+                    "description": "\"90d\" | \"auto\" | \"manual\"",
+                    "type": "string"
+                  },
+                  "lastRotated": {
+                    "description": "ISO date",
+                    "type": "string"
+                  },
+                  "console": {
+                    "type": "string"
+                  },
+                  "runbook": {
+                    "type": "string"
+                  },
+                  "access": {
+                    "type": "string"
+                  },
+                  "why": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "service"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "policy": {
+          "type": "string",
+          "enum": [
+            "local",
+            "committed"
+          ]
+        }
+      }
+    },
+    "cli": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "use": {
+                "type": "string"
+              },
+              "install": {
+                "type": "object",
+                "properties": {
+                  "brew": {
+                    "type": "string"
+                  },
+                  "post": {
+                    "type": "string"
+                  },
+                  "winget": {
+                    "type": "string"
+                  },
+                  "scoop": {
+                    "type": "string"
+                  },
+                  "apt": {
+                    "type": "string"
+                  },
+                  "npx": {
+                    "type": "string"
+                  },
+                  "bunx": {
+                    "type": "string"
+                  }
+                }
+              },
+              "bin": {
+                "type": "string"
+              },
+              "check": {
+                "description": "Comando que prova que o CLI está autenticado",
+                "type": "string"
+              },
+              "auth": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "external"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "env": {
+                        "minItems": 1,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "login": {
+                        "type": "string"
+                      },
+                      "logout": {
+                        "type": "string"
+                      },
+                      "isolate": {
+                        "type": "string",
+                        "const": "home"
+                      }
+                    }
+                  }
+                ]
+              },
+              "tenant": {
+                "type": "object",
+                "properties": {
+                  "check": {
+                    "type": "string"
+                  },
+                  "select": {
+                    "type": "string"
+                  },
+                  "show": {
+                    "type": "string"
+                  },
+                  "expect": {
+                    "type": "string"
+                  }
+                }
+              },
+              "needs": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "why": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "mcp": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "use": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "stdio",
+                  "http",
+                  "sse"
+                ]
+              },
+              "command": {
+                "type": "string"
+              },
+              "args": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "url": {
+                "type": "string"
+              },
+              "env": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "headers": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "needs": {
+                "default": [],
+                "description": "Vars que este server exige",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "oauth": {
+                "type": "object",
+                "properties": {
+                  "scopes": {
+                    "description": "Escopos fixados (RFC 6749, separados por espaço) — menor privilégio",
+                    "type": "string"
+                  },
+                  "clientId": {
+                    "type": "string"
+                  },
+                  "clientSecret": {
+                    "type": "string"
+                  },
+                  "authorizationParams": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "isolate": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "home"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "env": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "env"
+                    ]
+                  }
+                ]
+              },
+              "health": {
+                "type": "string"
+              },
+              "why": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "permissions": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "allow": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "plugboard"
+  ],
+  "additionalProperties": false
+}
