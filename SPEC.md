@@ -46,7 +46,7 @@ fonte única — gera `schema.json` (draft-07, io:"input") pro editor e valida e
 
 ```jsonc
 {
-  "$schema": "https://unpkg.com/plugboard/schema.json",
+  "$schema": "https://raw.githubusercontent.com/gabriellst/plugboard/v0.1.0/schema.json",
   "plugboard": 1,
   "extends": "..",
   "profile": "bk",                      // identidade → CLAUDE_CONFIG_DIR isolado

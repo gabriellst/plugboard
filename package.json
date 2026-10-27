@@ -1,6 +1,6 @@
 {
 	"name": "plugboard",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Cascading connections & credentials for AI coding agents",
 	"type": "module",
 	"license": "MIT",

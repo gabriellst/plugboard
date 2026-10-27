@@ -22,8 +22,12 @@ bk-company/connections.jsonc          ← CLIs e políticas da organização
 
 ## Instalação
 
+Ainda não está no npm: a instalação é pelo tarball do Release no GitHub.
+
 ```bash
-npm i -g plugboard     # ou: bun add -g plugboard · pnpm add -g plugboard
+bun add -g https://github.com/gabriellst/plugboard/releases/download/v0.1.0/plugboard-0.1.0.tgz
+# ou
+npm i -g https://github.com/gabriellst/plugboard/releases/download/v0.1.0/plugboard-0.1.0.tgz
 ```
 
 Requer Node ≥ 20 (funciona sob bun também).
@@ -46,7 +50,7 @@ qualquer subdiretório.
 
 ```jsonc
 {
-  "$schema": "https://unpkg.com/plugboard/schema.json",
+  "$schema": "https://raw.githubusercontent.com/gabriellst/plugboard/v0.1.0/schema.json",
   "plugboard": 1,
   "extends": "..",                     // "auto" (default) · caminho · null p/ raiz
   "profile": "meu-projeto",            // identidade isolada (contas separadas por projeto)
