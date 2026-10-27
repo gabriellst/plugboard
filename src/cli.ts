@@ -3,7 +3,7 @@ import { defineCommand, runMain } from 'citty'
 import { EXIT, PlugboardError } from './core/errors.js'
 
 const main = defineCommand({
-  meta: { name: 'plugboard', version: '0.0.0', description: 'Cascading connections & credentials for AI coding agents' },
+  meta: { name: 'plugboard', version: '0.1.0', description: 'Cascading connections & credentials for AI coding agents' },
   subCommands: {
     init: () => import('./commands/init.js').then((m) => m.default),
     resolve: () => import('./commands/resolve.js').then((m) => m.default),
