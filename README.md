@@ -50,7 +50,7 @@ qualquer subdiretório.
 
 ```jsonc
 {
-  "$schema": "https://unpkg.com/plugboard/schema.json",
+  "$schema": "https://raw.githubusercontent.com/gabriellst/plugboard/v0.1.0/schema.json",
   "plugboard": 1,
   "extends": "..",                     // "auto" (default) · caminho · null p/ raiz
   "profile": "meu-projeto",            // identidade isolada (contas separadas por projeto)
